@@ -43,13 +43,28 @@ class Stack:
         self.head = self.head.next
         return data
     def is_empty(self):
-        if len(self.head):
-            return True
-        return False
+        if self.head:
+            return False
+        return True
     def peak(self):
         if self.is_empty():
             return -1
         return self.head.data
+        
     
+def solve():
+    K = int(input())
+    numbers = Stack()
+    sum_num=0
+    for _ in range(K):
+        value = int(input())
+        if value !=0:
+            numbers.push(value)
+            sum_num+=numbers.head.data
+        else:
+            sum_num-=numbers.pop()
+    print(sum_num)
             
+if __name__ =="__main__":
+    solve()                   
         
