@@ -41,7 +41,7 @@ def solve():
             Queue.enqueue(temp)
         if Queue.isempty:
             break
-    
+    #
 
 
 
