@@ -1,5 +1,5 @@
 #https://www.acmicpc.net/problem/2164
-#
+##
 class Node:
     def __init__(self,data):
         self.data = data
