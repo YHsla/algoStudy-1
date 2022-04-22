@@ -8,19 +8,22 @@ class Node:
         
 class queue:
     def __init__(self):
-        self.front = Node(None)
-        self.rear = Node(None)
+        self.front = None
+        self.rear = None
         self.size = 0
     def qsize(self):
         return self.size
     def enqueue(self, data):
         if not self.size:
-            self.front = Node(data)
-            self.rear = Node(data)
-        NewNode = Node(data)
-        NewNode.prev = self.rear
-        self.rear = NewNode
-        NewNode.next = self.rear
+            NewNode = Node(data)
+            self.front = NewNode
+            self.rear = NewNode
+            self.front.next = self.rear.prev
+        else:
+            NewNode = Node(data)
+            self.rear.next = NewNode
+            NewNode.prev = self.rear
+            self.rear = NewNode
         self.size+=1
     def dequeue(self):
         if self.size > 0:
@@ -36,13 +39,13 @@ def solve():
     Queue = queue()
     for x in numbers:
         Queue.enqueue(x)
-    temp = 1
-    while (Queue.size > 1):
-        for _ in range(2):
-            temp = Queue.dequeue()
-        Queue.enqueue(temp)
+    while True:
+        if Queue.size == 1:
+            break
+        Queue.dequeue()
+        Queue.enqueue(Queue.dequeue())
 
-    return print(temp)
+    return print(Queue.dequeue())
 
 if __name__ == "__main__":
     solve()
