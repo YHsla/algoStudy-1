@@ -2,6 +2,7 @@
 
 def solve():
     N = int(input())
+    
     return
 
 if __name__ == "__main__":
