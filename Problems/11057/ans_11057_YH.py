@@ -8,6 +8,7 @@ def solve():
         for j in range(10):
             for k in range(j+1):
                 dp[i][k]+=dp[i-1][j]
+                print(dp[i][k],dp[i-1][j])
     return print(sum(dp[N])%10007)
 
 def solve2():
