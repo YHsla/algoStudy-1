@@ -15,7 +15,7 @@ def check(s):
             continue
     return True
     
-
+#
 def solution(s):
     answer = 0
     temp = list(s)
