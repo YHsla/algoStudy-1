@@ -1,18 +1,26 @@
 #https://www.acmicpc.net/problem/1260
 
 ##  
-def dfs(graph,node):
-    visit[node]
-    
-    
-    
-    
+def dfs(node):
+    visited[node] = True
+    print(node, end=' ')
+    for i in graph[node]:
+        if not visited[i]:
+            dfs(i)
+   
 
 def solve():
+    global graph, visited
     N,M,V = map(int,input().split())
-    graph = [list(map(int, input().split())) for _ in range(M)]
-
-
+    graph = [[] for _ in range(N+1)]
+    visited = [False]*(N+1)
+    for _ in range(M):
+        x, y = map(int, input().split())
+        graph[x].append(y)
+        graph[y].append(x)
+    for i in range(N+1):
+        graph[i].sort()
+    dfs(V)
 
     return
 
