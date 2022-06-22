@@ -1,26 +1,43 @@
 #https://www.acmicpc.net/problem/1260
+from collections import deque
+#breadth-First Search  
+def bfs(node):
+    global graph, visited
+    queue = deque([node])
+    visited[node] = True
 
-##  
+    while queue:
+        sNode = queue.popleft()
+        print(sNode, end=' ')
+        for i in graph[sNode]:
+            if not visited[i]:
+                queue.append(i)
+                visited[i]=True
+    return
+#Depth-First Search
 def dfs(node):
     visited[node] = True
     print(node, end=' ')
     for i in graph[node]:
         if not visited[i]:
             dfs(i)
-   
+    return
 
 def solve():
     global graph, visited
     N,M,V = map(int,input().split())
     graph = [[] for _ in range(N+1)]
-    visited = [False]*(N+1)
     for _ in range(M):
         x, y = map(int, input().split())
         graph[x].append(y)
         graph[y].append(x)
     for i in range(N+1):
         graph[i].sort()
+    visited = [False]*(N+1)
     dfs(V)
+    print('')
+    visited = [False]*(N+1)
+    bfs(V)
 
     return
 
