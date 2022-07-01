@@ -22,20 +22,20 @@ class Queue:
         NewNode.prev = self.tail
         self.tail = NewNode
     def popleft(self):
-        self.size-=1
-        TarNode = self.head
+        self.size-=1 
+        temp = self.head.data
         self.head = self.head.next
         if self.head == None:
-            self.tail = None
-        return TarNode.data
-
+            self.tail = None       
+        return temp
     
 def bfs(x,y, graph, visited):
     # queue = deque()
     queue = Queue()
     queue.append((x,y))
 
-    while queue:
+    # while queue:
+    while queue.size:
         x, y = queue.popleft()
         for i in range(4):
             nx = x+dx[i]
