@@ -3,8 +3,11 @@ from collections import deque
 
 def bfs(x,y, graph, visited):
     queue = deque()
-    queue.append((x,y))
-    complex = 0
+    if graph[x][y] == 1:
+        Num = 1
+        queue.append((x,y))
+        visited[x][y] = 1
+        graph[x][y] = 0
 
     while queue:
         x, y = queue.popleft()
@@ -13,14 +16,14 @@ def bfs(x,y, graph, visited):
             ny = y+dy[i]
             if (0 <= nx < n and 0 <= ny < n):
                 if visited[nx][ny] == 0 and graph[nx][ny] == 1:
-                    complex+=1
+                    Num+=1
                     visited[nx][ny]=1
                     queue.append((nx,ny))
-        # if nx == n-1 and ny == n-1 :
-    return (complex,x,y)
+                    graph[nx][ny] = 0
+    return Num
 
 def solve():
-    global dx, dy, n
+    global dx, dy, n, graph
     n = int(input())
     graph =[]
     visited=[[0]*n for _ in range(n)]
@@ -29,19 +32,17 @@ def solve():
     res = []
     for _ in range(n):
         graph.append(list(map(int,list(input()))))
-    print(graph)
-    x, y = 0, 0
-    while x != n-1 and y != n-1:
-        num, nx, ny = bfs(x,y,graph,visited)
-        if graph[nx+1][ny] == 1:
-            x,y = nx+1, ny
-        elif graph[nx][ny+1] == 1:
-            x,y = nx, ny+1
-        else:
-            x,y = nx+1, ny+1
-        print(x,y)
-        res.append(num)
-    return print(res)
+    # print(graph)
+    for i in range(n):
+        for j in range(n):
+            if graph[i][j] == 1:
+                temp = bfs(i, j, graph, visited)
+                res.append(temp)
+    res.sort()
+    print(len(res))
+    for x in res:
+        print(x)
+    return 
 
 if __name__ == "__main__":
     solve()
