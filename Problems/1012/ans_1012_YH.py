@@ -1,6 +1,27 @@
 #https://www.acmicpc.net/problem/1012
 from collections import deque
 
+def dfs(x,y,visited,graph):
+    stack = deque()
+    if graph[y][x] == 1:
+        stack.append((x,y))
+        visited[y][x] = 1
+        graph[y][x] = 0
+
+    while stack:
+        x, y = stack.pop()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < M and 0 <= ny < N:
+                if graph[ny][nx] == 1 and visited[ny][nx] == 0:
+                    visited[ny][nx] = 1
+                    stack.append((nx,ny))
+                    print(nx, ny)
+                    graph[ny][nx] = 0 
+
+    return
+
 def bfs(x,y,visited,graph):
     queue = deque()
     if graph[y][x] == 1:
@@ -17,6 +38,7 @@ def bfs(x,y,visited,graph):
                 if graph[ny][nx] == 1 and visited[ny][nx] == 0:
                     visited[ny][nx] = 1
                     queue.append((nx,ny))
+                    print(nx,ny)
                     graph[ny][nx] = 0      
     return
 
@@ -40,6 +62,7 @@ def solve():
             for j in range(N):
                 if graph[j][i] == 1:
                     bfs(i, j, visited, graph)
+                    # dfs(i, j, visited, graph)
                     cnt+=1
         
         print(cnt)
