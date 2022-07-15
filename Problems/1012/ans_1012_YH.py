@@ -1,6 +1,6 @@
 #https://www.acmicpc.net/problem/1012
 from collections import deque
-
+#
 def dfs(x,y,visited,graph):
     stack = deque()
     if graph[y][x] == 1:
